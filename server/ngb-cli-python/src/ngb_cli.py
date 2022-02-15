@@ -1,4 +1,5 @@
 import click
+from src.api.base import API
 
 
 @click.group()
@@ -18,3 +19,15 @@ def hello_world(name):
         click.echo(f'Hello, {name}!')
     else:
         click.echo('Hello, world!')
+
+
+@cli.command()
+def api_version():
+    """
+    Returns API version
+    """
+    api = API.instance()
+    response_data = api.call("version", data=None)
+    click.echo(f'API version: {response_data["payload"]}')
+
+
