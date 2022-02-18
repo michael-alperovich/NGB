@@ -1,5 +1,6 @@
 import click
-from src.api.base import API
+from .api.base import API
+from .api.reference import ReferenceAPI
 
 
 @click.group()
@@ -31,3 +32,14 @@ def api_version():
     click.echo(f'API version: {response_data["payload"]}')
 
 
+@cli.group()
+def reference():
+    """
+    Reference related commands
+    """
+
+
+@reference.command(name='list')
+def reference_list():
+    response_data = ReferenceAPI.list_references()
+    click.echo(response_data)
